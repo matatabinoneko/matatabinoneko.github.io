@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muturly - パートナーとのコミュニケーション支援アプリ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background: linear-gradient(135deg, #FFF8F1 0%, #FFE8E0 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #FF6F61 0%, #FF8A7A 100%);
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(255, 111, 97, 0.3);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .app-icon {
+            width: 80px;
+            height: 80px;
+            padding: 5px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.1));
+        }
+
+        .logo {
+            font-size: 3rem;
+            font-weight: 700;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            color: #FFF8F1;
+            font-weight: 300;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 3rem 0;
+        }
+
+        .section {
+            background: white;
+            margin: 2rem 0;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+            border: 1px solid rgba(255, 111, 97, 0.1);
+        }
+
+        .section h2 {
+            color: #FF6F61;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+            border-bottom: 3px solid #FFD966;
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        .section h3 {
+            color: #5C2E2E;
+            font-size: 1.5rem;
+            margin: 2rem 0 1rem 0;
+            font-weight: 500;
+        }
+
+        .section h4 {
+            color: #FF6F61;
+            font-size: 1.3rem;
+            margin: 1.5rem 0 1rem 0;
+            font-weight: 500;
+        }
+
+        .concept {
+            background: linear-gradient(135deg, #FFD966 0%, #FFE082 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-left: 5px solid #FF6F61;
+        }
+
+        .concept-content {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .concept-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            flex-shrink: 0;
+        }
+
+        .concept p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #5C2E2E;
+            margin: 0;
+        }
+
+        /* Feature Cards */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, #FFF8F1 0%, #FFE8E0 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 2px solid rgba(255, 111, 97, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(255, 111, 97, 0.2);
+        }
+
+        .feature-card h4 {
+            color: #FF6F61;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .feature-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .feature-card li {
+            margin: 0.8rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: #5C2E2E;
+        }
+
+        .feature-card li:before {
+            content: "💝";
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        /* Pricing Table */
+        .pricing-table {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            margin: 2rem 0;
+        }
+
+        .pricing-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .pricing-table th {
+            background: linear-gradient(135deg, #FF6F61 0%, #FF8A7A 100%);
+            color: white;
+            padding: 1.5rem;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        .pricing-table td {
+            padding: 1.2rem 1.5rem;
+            text-align: center;
+            border-bottom: 1px solid #FFE8E0;
+        }
+
+        .pricing-table tr:nth-child(even) {
+            background: #FFF8F1;
+        }
+
+        /* Download Section */
+        .download-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 3rem;
+            margin: 2rem 0;
+        }
+
+        .app-preview {
+            width: 200px;
+            height: 200px;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(255, 111, 97, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .app-preview:hover {
+            transform: scale(1.05);
+        }
+
+        /* App Links */
+        .app-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .app-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #FF6F61 0%, #FF8A7A 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 111, 97, 0.3);
+        }
+
+        .app-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 111, 97, 0.4);
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, #5C2E2E 0%, #7A3A3A 100%);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 2rem;
+            }
+
+            .logo-container {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .app-icon {
+                width: 60px;
+                height: 60px;
+                padding: 5px;
+            }
+            
+            .section {
+                padding: 1.5rem;
+                margin: 1rem 0;
+            }
+
+            .concept-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .concept-image {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .download-section {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .app-preview {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .app-links {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .pricing-table {
+                overflow-x: auto;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .concept {
+            animation: fadeInUp 0.8s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo-container">
+                <img src="assets/images/icon.svg"  alt="Muturly ロゴ" class="app-icon">
+                <h1 class="logo">Muturly</h1>
+            </div>
+            <p class="tagline">パートナーとのコミュニケーション支援アプリ</p>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <!-- コンセプト -->
+            <section class="section">
+                <h2>コンセプト</h2>
+                <div class="concept">
+                    <div class="concept-content">
+                        <img src="assets/images/tsutae-ai-smile.png" alt="AI ファシリテーション" class="concept-image">
+                        <p>『Muturly（ミュータリー）』とは、「mutually（お互いに）」と「maturely（成熟した）」を掛け合わせた造語です。カップルや夫婦がお互いに気持ちを伝え合い、成熟した関係を築くためのコミュニケーション支援アプリとして開発しました。日常の小さな「ありがとう」を積み重ね、不満や悩みも建設的に伝え合うことができる仕組みを提供します。AI が話し合いをファシリテートしてくれるので、言うのをためらってしまうような負の感情も安心して共有できます。</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- メインターゲット -->
+            <section class="section">
+                <h2>メインターゲット</h2>
+                <ul style="list-style: none; padding-left: 0;">
+                    <li style="margin: 1rem 0; padding-left: 2rem; position: relative; color: #5C2E2E;">
+                        <span style="position: absolute; left: 0; top: 0; color: #FF6F61; font-size: 1.2rem;">👫</span>
+                        カップル・夫婦などのパートナー同士
+                    </li>
+                    <li style="margin: 1rem 0; padding-left: 2rem; position: relative; color: #5C2E2E;">
+                        <span style="position: absolute; left: 0; top: 0; color: #FF6F61; font-size: 1.2rem;">💬</span>
+                        円滑なコミュニケーションを図りたい人々
+                    </li>
+                </ul>
+            </section>
+
+            <!-- 主な機能 -->
+            <section class="section">
+                <h2>主な機能</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h4>① ありがとうメモ、もやもやメモ</h4>
+                        <ul>
+                            <li>日常生活でパートナーにしてもらえて嬉しかったことや、不満に思っていることを、具体的なエピソードとして記録。</li>
+                            <li>メモは随時追加可能で、「つたえあい」時に確認可能。</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <h4>② 感情共有会議「つたえあい」</h4>
+                        <ul>
+                            <li>メモに残した感謝のエピソードや不満点を共有し合う。</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <h4>③ ありがとう共有フェーズ</h4>
+                        <ul>
+                            <li>まず互いの感謝エピソードを確認し、アプリ上で共有。</li>
+                            <li>直接言葉でも感謝を伝えることを促進する。</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <h4>④ もやもや共有・議論フェーズ（AI ファシリテーション機能）</h4>
+                        <ul>
+                            <li>もやもやを「出来事」「そのとき思ったこと」「なぜそう思ったのか」の形式で記録。</li>
+                            <li>AI がファシリテータとして参加し、人格攻撃にならないよう発言をサポート。</li>
+                            <li>双方が一定の会話を行ったら、AI が適切なタイミングで区切りを提案し、それぞれに理解や気持ちが伝わったか確認。</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <h4>⑤ 履歴・振り返り機能</h4>
+                        <ul>
+                            <li>感謝、不満議論の履歴を時系列で記録し、過去を振り返って関係性の成長や改善を実感できる。</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- AI ファシリテーション詳細 -->
+            <section class="section">
+                <h2>AI ファシリテーション詳細</h2>
+                <ul style="list-style: none; padding-left: 0;">
+                    <li style="margin: 1rem 0; padding-left: 2rem; position: relative; color: #5C2E2E;">
+                        <span style="position: absolute; left: 0; top: 0; color: #FF6F61; font-size: 1.2rem;">🤖</span>
+                        双方の意見を引き出す質問を提示
+                    </li>
+                    <li style="margin: 1rem 0; padding-left: 2rem; position: relative; color: #5C2E2E;">
+                        <span style="position: absolute; left: 0; top: 0; color: #FF6F61; font-size: 1.2rem;">💭</span>
+                        「I メッセージ（私はこう感じた）」を促進
+                    </li>
+                    <li style="margin: 1rem 0; padding-left: 2rem; position: relative; color: #5C2E2E;">
+                        <span style="position: absolute; left: 0; top: 0; color: #FF6F61; font-size: 1.2rem;">🧠</span>
+                        円滑で冷静なコミュニケーションを維持するための心理学的ガイダンスを提供
+                    </li>
+                </ul>
+            </section>
+
+            <!-- 利用イメージ -->
+            <section class="section">
+                <h2>利用イメージ</h2>
+                <ul style="list-style: none; padding-left: 0;">
+                    <li style="margin: 1rem 0; padding-left: 2rem; position: relative; color: #5C2E2E;">
+                        <span style="position: absolute; left: 0; top: 0; color: #FFD966; font-size: 1.2rem;">✨</span>
+                        感謝や気持ちを自然に表現できるようになる
+                    </li>
+                    <li style="margin: 1rem 0; padding-left: 2rem; position: relative; color: #5C2E2E;">
+                        <span style="position: absolute; left: 0; top: 0; color: #FFD966; font-size: 1.2rem;">🗣️</span>
+                        不満を溜め込まず、定期的にコミュニケーションできる
+                    </li>
+                    <li style="margin: 1rem 0; padding-left: 2rem; position: relative; color: #5C2E2E;">
+                        <span style="position: absolute; left: 0; top: 0; color: #FFD966; font-size: 1.2rem;">💕</span>
+                        パートナー同士の絆や信頼感が高まる
+                    </li>
+                </ul>
+                <p style="margin-top: 2rem; font-style: italic; color: #5C2E2E; text-align: center; font-size: 1.1rem;">
+                    『Muturly』は、パートナーとの関係をより深め、長期的に良好なコミュニケーションを築く手助けとなるアプリを目指しています。
+                </p>
+            </section>
+
+            <!-- 課金について -->
+            <section class="section">
+                <h2>課金について</h2>
+                <p style="margin-bottom: 2rem; color: #5C2E2E;">本機能は基本無料で使用できるますが、利用回数に制限がかかります</p>
+                
+                <div class="pricing-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>機能</th>
+                                <th>無料ユーザー</th>
+                                <th>課金ユーザー</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>会議回数</td>
+                                <td>1 回/月</td>
+                                <td>1 回/週</td>
+                            </tr>
+                            <tr>
+                                <td>1 会議での もやもや 登録数</td>
+                                <td>1個</td>
+                                <td>3個</td>
+                            </tr>
+                            <tr>
+                                <td>AI とのやり取り回数</td>
+                                <td>10/もやもや</td>
+                                <td>30/もやもや</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p style="margin-top: 2rem; color: #5C2E2E; text-align: center;">
+                    無料会員でも、有料会員の相手が会議を作成すれば、週に 1 回会議に参加することが可能。<br>
+                </p>
+            </section>
+
+            <!-- アプリダウンロード -->
+            <section class="section">
+                <h2>アプリダウンロード</h2>
+                <div class="download-section">
+                    <img src="assets/images/tsutae-ai-smile.png" alt="Muturly アプリ" class="app-preview">
+                    <div class="app-links">
+                        <a href="https://apps.apple.com/app/id6752630144" class="app-link" target="_blank">
+                            📱 iOS版をダウンロード
+                        </a>
+                        <a href="https://play.google.com/store/apps/details?id=com.matatabinoneko.communicationwithpartnerapp" class="app-link" target="_blank">
+                            🤖 Android版をダウンロード
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Muturly. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
